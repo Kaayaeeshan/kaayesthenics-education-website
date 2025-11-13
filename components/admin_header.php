@@ -11,7 +11,10 @@
         </form>
 
         <div class="icons">
-
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="user-toggle" class="fas fa-sun" ></div>
         </div>
 
     </section>
