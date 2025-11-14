@@ -2,7 +2,7 @@
 
 <?php
 
-$db_name = 'mysql:host=localhost;dbname = course_db;';
+$db_name = 'mysql:host=localhost;dbname=course_db;';
 $db_user_name = 'root';
 $db_user_pass = '';
 
