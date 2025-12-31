@@ -18,7 +18,7 @@
     box-sizing: border-box;
     outline: none;
     border: none;
-    text-decoration: none;
+    text-decoration:none;
 }
 
 *::selection{
@@ -48,12 +48,62 @@ html{
 body{
     padding-bottom:9rem;
     background-color:var(--light-bg);
+    padding-left:30rem;
+}
+
+body.active{
+    padding-left: 0;
 }
 
 section{
     padding:2rem;
     margin: 0 auto;
     max-width: 1200px;
+}
+
+.heading{
+    font-size: 3rem;
+    color:var(--black);
+    text-transform: capitalize;
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    border-bottom:var(--border);
+}
+
+.message{
+    position:sticky;
+    top:0; right:0; left:0;
+    z-index:1200;
+    background-color: var(--light-bg);
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    gap:1.5rem;
+    padding:2rem;
+    max-width: 1200px;
+    margin:0 auto;
+    border-radius:.5rem;
+}
+
+.message.form{
+    top:2rem;
+    background-color: var(--white);
+}
+
+.message span{
+    font-size: 2rem;
+    color:var(--black);
+}
+
+.message i{
+    cursor:pointer;
+    font-size:2.5rem;
+    color:var(--red);
+    transition: .2s linear;
+}
+
+.message i:hover{
+    transform: rotate(90deg);
 }
 
 .btn,.option-btn,.delete-btn,.inline-btn,.inline-option-btn,.inline-delete-btn{
@@ -104,6 +154,7 @@ section{
     left:0;
     right:0;
     background-color:var(--white);
+    border-bottom:var(--border);
     z-index:1000;
 }
 
@@ -184,6 +235,10 @@ section{
     transition: .2s linear;
 }
 
+.header .flex .profile.active{
+    transform:scale(1);
+}
+
 .header .flex .profile h3{
     margin-bottom: .5rem;
     font-size: 2rem;
@@ -220,7 +275,7 @@ section{
     left:-30rem;
 }
 
-.slider-bar .profile{
+.slide-bar .profile{
     background-color: var(--white);
     padding:3rem 2rem;
     text-align:center;
@@ -275,9 +330,125 @@ section{
     background-color: var(--light-bg);
 }
 
+.slide-bar .close-bar{
+    text-align: right;
+    padding:2rem;
+    padding-bottom:0;
+    display:none;
+}
 
+.slide-bar .close-bar i{
+    height:4.5rem;
+    width:4.5rem;
+    line-height:4.4rem;
+    color:#fff;
+    background-color:var(--red);
+    cursor:pointer;
+    border-radius:.5rem;
+    font-size:2rem;
+    text-align:center;
+}
 
+.dashboard .box-container{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+    gap:1.5rem;
+    justify-content: center; 
+    align-items: flex-start;   
+    
+}
 
+.dashboard .box-container .box{
+    border-radius: .5rem;
+    background-color:var(--white);
+    padding:1.5rem;
+    text-align:center;
+}
+
+.dashboard .box-container .box h3{
+    font-size:2.5rem;
+    color:var(--black);
+    margin-bottom:.5rem;
+}
+
+.dashboard .box-container .box p{
+    margin:1rem 0;
+    border-radius:.5rem;
+    padding:1rem;
+    background-color: var(--light-bg);
+    font-size:2rem;
+    color:var(--light-color);
+}
+
+.form-container{
+    min-height: calc(100vh - 17rem);
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.form-container form{
+    width:80rem;
+    background-color: var(--white);
+    border-radius: .5rem;
+    padding:2rem;
+}
+
+.form-container form h3{
+    font-size:2.5rem;
+    text-align:center;
+    color:var(--black);
+    margin-bottom:1rem;
+    text-transform:capitalize;
+}
+
+.form-container form .flex{
+    display: flex;
+    gap:1.5rem;
+    flex-wrap:wrap;
+}
+
+.form-container form .flex .col{
+    flex:1 1 35rem;
+}
+
+.form-container form p{
+    padding-top: 1rem;
+    font-size:1.7rem;
+    color:var(--light-color);
+}
+
+.form-container form p span{
+    color:var(--red);
+}
+
+.form-container form .box{
+    width:100%;
+    border-radius:.5rem;
+    margin:1rem 0;
+    padding:1.4rem;
+    font-size:1.8rem;
+    color:var(--black);
+    background-color:var(--light-bg);
+}
+
+.form-container form.login{
+    width:50rem;
+}
+
+.form-container form .link{
+    padding-top:2rem;
+    text-align: center;
+    font-size:2rem;
+}
+
+.form-container form .link a{
+    color:var(--main-color);
+}
+
+.form-container form .link a:hover{
+    text-decoration:underline;
+}
 
 
 
@@ -349,6 +520,16 @@ section{
     .footer{
         padding-left:2rem;
     }
+
+    .slide-bar.active{
+        left:0;
+        box-shadow: 0 0 0 100vw rgba(0,0,0,.7);
+
+    }
+
+    .slide-bar #close-bar{
+        display: block;
+    }
 }
 
 @media (max-width:991px){
@@ -383,5 +564,9 @@ section{
 @media (max-width:450px){
     html{
         font-size:50%;
+    }
+
+    .heading{
+        font-size: 2.5rem;
     }
 }
