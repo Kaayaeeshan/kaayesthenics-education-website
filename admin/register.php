@@ -10,20 +10,14 @@ if(isset($_COOKIE['tutor_id'])){
 if(isset($_POST['submit'])){
 
     $id =create_unique_id();
-    $name = $_POST['name'];
-    $name = filter_var($name,FILTER_SANITIZE_STRING);
-    $profession = $_POST['profession'];
-    $profession = filter_var($profession,FILTER_SANITIZE_STRING);
-    $email = $_POST['email'];
-    $email = filter_var($email,FILTER_SANITIZE_STRING);
-    $pass = sha1($_POST['pass']);
-    $pass = filter_Var($pass,FILTER_SANITIZE_STRING);
-    $c_pass = sha1($_POST['c_pass']);
-    $c_pass = filter_var($c_pass,FILTER_SANITIZE_STRING);
+    $name = filter_input(INPUT_POST,"name",FILTER_SANITIZE_SPECIAL_CHARS);
+    $profession = filter_input(INPUT_POST,"profession",FILTER_SANITIZE_SPECIAL_CHARS);
+    $email = filter_input(INPUT_POST,"email",FILTER_VALIDATE_EMAIL);
+    $pass = $_POST['pass'];
+    $c_pass =$_POST['c_pass'];
 
-    $image = $_FILES['image']['name'];
-    $image = filter_var($image,FILTER_SANITIZE_STRING);
-    $ext = pathinfo($image, PATHINFO_EXTENSION);
+    $image = basename($_FILES['image']['name']);
+    $ext = strtolower(pathinfo($image, PATHINFO_EXTENSION));
     $rename = create_unique_id().'.'.$ext;
     $image_tmp_name = $_FILES['image']['tmp_name'];
     $image_size = $_FILES['image']['size'];
@@ -40,27 +34,17 @@ if(isset($_POST['submit'])){
             $message[] = 'password not matched!';
         }
         else{
+
+            $pass = password_hash($pass, PASSWORD_DEFAULT);
+
             if($image_size > 2000000){
                 $message[] = "image size is too large!";
             }else{
             $insert_tutor = $conn -> prepare("INSERT INTO `tutors`(id,name,profession,email,password,image) VALUES(?,?,?,?,?,?) ");
-            $insert_tutor -> execute([$id,$name,$profession,$email,$c_pass,$rename]);
+            $insert_tutor -> execute([$id,$name,$profession,$email,$pass,$rename]);
             move_uploaded_file($image_tmp_name,$image_folder);
-            $message[]="New user registered please login now";
-            }
-
-            $verify_tutor = $conn -> prepare("SELECT * FROM `tutors` WHERE email = ? AND password =? LIMIT 1 ");
-            $verify_tutor->execute([$email,$c_pass]);
-            $row = $verify_tutor->fetch(PDO::FETCH_ASSOC);
-
-            if($insert_tutor){
-                if($verify_tutor->rowCount()>0){
-                    setcookie('tutor_id',$row['id'], time() + 60*60*24*30, '/');
-                    header('location:dashboard.php');
-                }
-                else{
-                    $message[] = 'something went worng!';
-                }
+            setcookie('tutor_id',$id, time() + 60*60*24*30, '/');
+            header('location:dashboard.php');
             }
         }
     }
