@@ -13,8 +13,8 @@ if(isset($_POST['submit'])){
     $name = filter_input(INPUT_POST,"name",FILTER_SANITIZE_SPECIAL_CHARS);
     $profession = filter_input(INPUT_POST,"profession",FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST,"email",FILTER_VALIDATE_EMAIL);
-    $pass = $_POST['pass'];
-    $c_pass =$_POST['c_pass'];
+    $pass = trim($_POST['pass']);
+    $c_pass =trim($_POST['c_pass']);
 
     $image = basename($_FILES['image']['name']);
     $ext = strtolower(pathinfo($image, PATHINFO_EXTENSION));
