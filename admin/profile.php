@@ -33,7 +33,7 @@ $total_comments = $count_comments->rowCount();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>profile</title>
 
 <!-- font awesome cdn link -->
  <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -47,58 +47,54 @@ $total_comments = $count_comments->rowCount();
 <!-- header section link -->
 <?php include "../components/admin_header.php"; ?>
 
-<!-- Dashboard section starts -->
+<!--profile section starts-->
 
-<section class="dashboard">
+<section class="profile">
+    
+    <h1 class="heading"> profile detatils </h1>
 
-    <h1 class="heading">dashboard</h1>
+    <div class="details">
+    
+    <div class="tutor">
+        <img src="../uploaded_files/<?= $fetch_profile['image']; ?>" alt=""/>
+        <h3><?= $fetch_profile['name']; ?></h3>
+        <span><?= $fetch_profile['profession']; ?></span>
+        <a href="update.php" class="inline-btn">update profile</a>
+    </div>
+    
 
     <div class="box-container">
 
         <div class="box">
-            <h3>welcome</h3>
-            <p><?=$fetch_profile['name']; ?></p>
-            <a href="profile.php" class="btn">view profile</a>
-        </div>
-
-        <div class="box">
-            <h3><?= $total_contents;?></h3>
-            <p>contents uploaded</p>
-            <a href="add_content.php" class="btn">add new content</a>
-        </div>
-
-        <div class="box">
-            <h3><?= $total_playlists;?></h3>
-            <p>playlists uploaded</p>
-            <a href="add_playlist.php" class="btn">add new playlist</a>
+            <h3><?= $total_contents ?></h3>
+            <p>total contents</p>
+            <a href="contents.php" class="btn">view contents </a>
         </div>
         
         <div class="box">
-            <h3><?= $total_likes;?></h3>
+            <h3><?= $total_playlists ?></h3>
+            <p>total playlists</p>
+            <a href="playlists.php" class="btn">view playlists</a>
+        </div>
+
+        <div class="box">
+            <h3><?= $total_likes ?></h3>
             <p>total likes</p>
             <a href="contents.php" class="btn">view contents</a>
         </div>
-        
+
         <div class="box">
-            <h3><?= $total_comments;?></h3>
+            <h3><?= $total_comments ?></h3>
             <p>total comments</p>
-            <a href="comments.php" class="btn">view comments</a>
+            <a href="comments.php" class="btn">view playlists</a>
         </div>
 
-        <div class="box">
-            <h3>quick links</h3>
-            <p>login or register</p>
-            <div class="flex-btn">
-                <a href="login.php" class="option-btn">login</a>
-                <a href="register.php" class="option-btn">register</a>
-            </div>
-        </div>
-
+    </div>
     </div>
 
 </section>
 
-<!-- Dashboard section ends -->
+<!--profile section ends-->
 
 
 <!-- footer section link -->
